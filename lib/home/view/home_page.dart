@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:housegroom/home/view/explore.dart';
+import 'package:housegroom/home/view/landing.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -51,6 +51,7 @@ class _HomePageState extends State<HomePage> {
             currentIndex: _selectedIndex,
             onTap: _onItemTapped,
           ),
+          body: _widgetList[_selectedIndex],
         ),
       ),
     );
