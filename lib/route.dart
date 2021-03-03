@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
-
-import 'home/view/home_page.dart';
+import 'package:housegroom/search/view/search.dart';
 
 class RouteConfiguration {
   static const String HOME_PAGE = "/";
 
-
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case HOME_PAGE:
-        return MaterialPageRoute(builder: (_) => HomePage());
+        return MaterialPageRoute(builder: (_) => Search());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(
-              body: Center(
-                child: Text('No route defined for ${settings.name}'),
-              ),
-            ));
+                  body: Center(
+                    child: Text('No route defined for ${settings.name}'),
+                  ),
+                ));
     }
   }
 }
