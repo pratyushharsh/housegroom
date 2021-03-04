@@ -20,11 +20,28 @@ class _SearchState extends State<Search> {
     Item(
       header: "Types of Services",
       body: "body1",
+      image: Image.asset('images/service.png'),
     ),
-    Item(header: "specialities", body: "body3"),
-    Item(header: "Gender", body: "body2"),
-    Item(header: "Age", body: "body3"),
-    Item(header: "Experience", body: "body3"),
+    Item(
+      header: "specialities",
+      body: "body3",
+      image: Image.asset('images/speciality.png'),
+    ),
+    Item(
+      header: "Gender",
+      body: "body2",
+      image: Image.asset('images/gender.png'),
+    ),
+    Item(
+      header: "Age",
+      body: "body3",
+      image: Image.asset('images/age.png'),
+    ),
+    Item(
+      header: "Experience",
+      body: "body3",
+      image: Image.asset('images/Experience.png'),
+    ),
   ];
   @override
   Widget build(BuildContext context) {
@@ -49,7 +66,7 @@ class _SearchState extends State<Search> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
-                    ProfessionalWidget("Domestic"),
+                    ProfessionalWidget("Domestic helper"),
                     ProfessionalWidget("Cook"),
                     ProfessionalWidget("Office boy"),
                     ProfessionalWidget("Driver"),
@@ -79,14 +96,14 @@ class _SearchState extends State<Search> {
                               padding: const EdgeInsets.only(left: 15),
                               child: CircleAvatar(
                                 radius: 30,
-                                backgroundColor: Colors.blue,
+                                //todo: backgroundImage: item.image,
                               ),
                             ),
                             SizedBox(
                               width: 20,
                             ),
                             Text(
-                              //check
+                              //TODO:check
                               item.header,
                               style: TextStyle(
                                   fontSize: 16, fontWeight: FontWeight.bold),
@@ -140,11 +157,17 @@ class ProfessionalWidget extends StatelessWidget {
     return Container(
       margin: EdgeInsets.all(8),
       child: Chip(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         backgroundColor: Colors.transparent,
         elevation: 5,
-        label: Text(
-          title,
-          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+        label: Container(
+          height: 40,
+          child: Center(
+            child: Text(
+              title,
+              style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
+          ),
         ),
       ),
     );

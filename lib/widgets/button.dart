@@ -7,7 +7,8 @@ class AppButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ButtonTheme(
-      minWidth: 300,
+      buttonColor: Colors.green,
+      minWidth: 350,
       height: 50,
       child: RaisedButton(
         child: Text(
