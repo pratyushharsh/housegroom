@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:housegroom/widgets/professionWidget.dart';
+import 'package:housegroom/widgets/button.dart';
 
 class Search extends StatefulWidget {
   @override
@@ -49,37 +49,12 @@ class _SearchState extends State<Search> {
                 child: ListView(
                   scrollDirection: Axis.horizontal,
                   children: <Widget>[
-                    FlatButton(
-                      padding: EdgeInsets.all(0),
-                      child: ProfessionalWidget("Domestic"),
-                      onPressed: () {},
-                    ),
-                    FlatButton(
-                      padding: EdgeInsets.all(0),
-                      child: ProfessionalWidget("Cook"),
-                      onPressed: () {},
-                    ),
-                    FlatButton(
-                      padding: EdgeInsets.all(0),
-                      child: ProfessionalWidget("Office boy"),
-                      onPressed: () {},
-                    ),
-                    FlatButton(
-                      padding: EdgeInsets.all(0),
-                      child: ProfessionalWidget("Driver"),
-                      onPressed: () {},
-                    ),
-                    FlatButton(
-                      padding: EdgeInsets.all(0),
-                      child: ProfessionalWidget("xyz"),
-                      onPressed: () {},
-                    ),
-                    FlatButton(
-                      padding: EdgeInsets.all(0),
-                      child: ProfessionalWidget("Electrician"),
-                      //todo: onselect color changes to black
-                      onPressed: () {},
-                    ),
+                    ProfessionalWidget("Domestic"),
+                    ProfessionalWidget("Cook"),
+                    ProfessionalWidget("Office boy"),
+                    ProfessionalWidget("Driver"),
+                    ProfessionalWidget("xyz"),
+                    ProfessionalWidget("Electrician"),
                   ],
                 )),
 
@@ -147,25 +122,29 @@ class _SearchState extends State<Search> {
                 );
               }).toList(),
             ),
-
             SizedBox(height: 40),
-            ButtonTheme(
-              minWidth: 300,
-              height: 50,
-              child: RaisedButton(
-                child: Text(
-                  "Submit",
-                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.zero,
-                ),
-                textColor: Colors.white,
-                color: Colors.green,
-                onPressed: () {},
-              ),
-            ),
+            AppButton(title: "submit", onpressed: null),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+//profession chips listview
+class ProfessionalWidget extends StatelessWidget {
+  final title;
+  ProfessionalWidget(this.title);
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(8),
+      child: Chip(
+        backgroundColor: Colors.transparent,
+        elevation: 5,
+        label: Text(
+          title,
+          style: TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
         ),
       ),
     );
