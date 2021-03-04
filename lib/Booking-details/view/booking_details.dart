@@ -9,8 +9,7 @@ class BookingDetails extends StatelessWidget {
       ),
       body: Column(
         children: [
-          //TODO: APP Logo
-          //Image.asset(),
+          Image.asset("images\groom.png"),
           SizedBox(
             height: 100,
           ),
@@ -52,11 +51,9 @@ class BookingDetails extends StatelessWidget {
           SizedBox(
             height: 50,
           ),
-
           Divider(
             thickness: 5.0,
           ),
-
           SizedBox(
             height: 50,
           ),
@@ -75,7 +72,6 @@ class BookingDetails extends StatelessWidget {
           Divider(
             thickness: 5.0,
           ),
-
           SizedBox(
             height: 90,
           ),
