@@ -9,7 +9,7 @@ class RouteConfiguration {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
     switch (settings.name) {
       case HOME_PAGE:
-        return MaterialPageRoute(builder: (_) => SignIn());
+        return MaterialPageRoute(builder: (_) => Search());
       default:
         return MaterialPageRoute(
             builder: (_) => Scaffold(

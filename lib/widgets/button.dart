@@ -11,6 +11,7 @@ class AppButton extends StatelessWidget {
       minWidth: 350,
       height: 50,
       child: RaisedButton(
+        color: Colors.green,
         child: Text(
           title,
           style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
@@ -19,7 +20,6 @@ class AppButton extends StatelessWidget {
           borderRadius: BorderRadius.zero,
         ),
         textColor: Colors.white,
-        color: Colors.green,
         onPressed: onpressed,
       ),
     );

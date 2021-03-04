@@ -20,7 +20,9 @@ class _SearchState extends State<Search> {
     Item(
       header: "Types of Services",
       body: "body1",
-      image: Image.asset('images/service.png'),
+      image: Image.asset(
+        'images/service.png',
+      ),
     ),
     Item(
       header: "specialities",
@@ -96,7 +98,8 @@ class _SearchState extends State<Search> {
                               padding: const EdgeInsets.only(left: 15),
                               child: CircleAvatar(
                                 radius: 30,
-                                //todo: backgroundImage: item.image,
+                                backgroundColor: Colors.white,
+                                child: item.image,
                               ),
                             ),
                             SizedBox(
@@ -140,7 +143,10 @@ class _SearchState extends State<Search> {
               }).toList(),
             ),
             SizedBox(height: 40),
-            AppButton(title: "submit", onpressed: null),
+            Container(
+                margin: EdgeInsets.all(15),
+                child: AppButton(
+                    title: "submit", onpressed: null, color: Colors.green)),
           ],
         ),
       ),
