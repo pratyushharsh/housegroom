@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../route.dart';
+
 class DomesticWorkerProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -7,11 +9,15 @@ class DomesticWorkerProfilePage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(
-            Icons.home,
-            color: Colors.blue,
+          icon: Image.asset(
+            'images/groom1.png',
+            fit: BoxFit.fill,
+            height: 30,
+            width: 30,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).pushNamed(RouteConfiguration.HOME_PAGE);
+          },
         ),
       ),
       body: Container(

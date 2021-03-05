@@ -8,7 +8,8 @@ class CatategoryContainer extends StatelessWidget {
     var height = MediaQuery.of(context).size.width / 3 - 20;
     return InkWell(
       onTap: () {
-        Navigator.of(context).pushNamed(RouteConfiguration.DOMESTIC_HELPER_SEARCH);
+        Navigator.of(context)
+            .pushNamed(RouteConfiguration.DOMESTIC_HELPER_SEARCH);
       },
       child: Container(
         height: height,
@@ -36,7 +37,6 @@ class SliderCard extends StatelessWidget {
   }
 }
 
-
 class LandingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -49,11 +49,14 @@ class LandingScreen extends StatelessWidget {
             children: [
               Container(
                 height: 250,
-                decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                decoration:
+                    BoxDecoration(border: Border.all(color: Colors.black)),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Container(
-                height: 100 ,
+                height: 100,
                 child: ListView(
                   shrinkWrap: true,
                   scrollDirection: Axis.horizontal,
@@ -65,12 +68,15 @@ class LandingScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              SizedBox(height: 20,),
+              SizedBox(
+                height: 20,
+              ),
               Container(
                   margin: EdgeInsets.all(4),
-                  child: Text("Service by Category", style: TextStyle(
-                    fontWeight: FontWeight.w600
-                  ),)),
+                  child: Text(
+                    "Service by Category",
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  )),
               GridView.count(
                 crossAxisCount: 3,
                 shrinkWrap: true,

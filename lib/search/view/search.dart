@@ -31,11 +31,15 @@ class _DomesticHelperSearchState extends State<DomesticHelperSearch> {
         appBar: AppBar(
           backgroundColor: Colors.white,
           leading: IconButton(
-            icon: Icon(
-              Icons.home,
-              color: Colors.blue,
+            icon: Image.asset(
+              'images/groom1.png',
+              fit: BoxFit.fill,
+              height: 30,
+              width: 30,
             ),
-            onPressed: () {},
+            onPressed: () {
+              Navigator.of(context).pushNamed(RouteConfiguration.HOME_PAGE);
+            },
           ),
         ),
         body: SingleChildScrollView(
