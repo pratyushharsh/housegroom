@@ -1,17 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:housegroom/route.dart';
 
 class CatategoryContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var height = MediaQuery.of(context).size.width / 3 - 20;
-    return Container(
-      height: height,
-      width: height,
-      margin: EdgeInsets.all(4.0),
-      decoration: BoxDecoration(border: Border.all(color: Colors.black)),
-      child: Center(
-        child: Icon(Icons.person_rounded),
+    return InkWell(
+      onTap: () {
+        Navigator.of(context).pushNamed(RouteConfiguration.DOMESTIC_HELPER_SEARCH);
+      },
+      child: Container(
+        height: height,
+        width: height,
+        margin: EdgeInsets.all(4.0),
+        decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+        child: Center(
+          child: Icon(Icons.person_rounded),
+        ),
       ),
     );
   }
