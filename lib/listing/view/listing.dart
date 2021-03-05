@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../../route.dart';
+
 class Listing extends StatelessWidget {
   final names = List<String>.generate(10, (i) => "Person $i");
   @override
@@ -27,7 +29,10 @@ class Listing extends StatelessWidget {
               title: Text('${names[index]}'),
               trailing: IconButton(
                 icon: Icon(Icons.arrow_forward_ios),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).pushNamed(
+                      RouteConfiguration.DOMESTIC_WORKER_PROFILE_PAGE);
+                },
               ),
             ),
           );

@@ -39,111 +39,116 @@ class _DomesticHelperSearchState extends State<DomesticHelperSearch> {
           ),
         ),
         body: SingleChildScrollView(
-          child: BlocBuilder<SearchBloc, SearchState>(
-            builder: (context, state) {
-              return Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Container(
-                      height: 80,
-                      width: 500,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: <Widget>[
-                          ProfessionalWidget("Domestic helper"),
-                          ProfessionalWidget("Cook"),
-                          ProfessionalWidget("Office boy"),
-                          ProfessionalWidget("Driver"),
-                          ProfessionalWidget("xyz"),
-                          ProfessionalWidget("Electrician"),
-                        ],
-                      )),
+          child:
+              BlocBuilder<SearchBloc, SearchState>(builder: (context, state) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(
+                    height: 80,
+                    width: 500,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: <Widget>[
+                        ProfessionalWidget("Domestic helper"),
+                        ProfessionalWidget("Cook"),
+                        ProfessionalWidget("Office boy"),
+                        ProfessionalWidget("Driver"),
+                        ProfessionalWidget("xyz"),
+                        ProfessionalWidget("Electrician"),
+                      ],
+                    )),
 
-                  //expansion panel
-                  ExpansionPanelList(
-                    expansionCallback: (int index, bool isExpanded) {
-                      setState(() {
-                        // _items[index].isExpanded = !_items[index].isExpanded;
-                        print('Index ${index} ${isExpanded}');
-                        if (isExpanded) {
-                          expandedSet.remove(_items[index].headerTag);
-                        } else {
-                          expandedSet.add(_items[index].headerTag);
-                        }
-
-                      });
-                    },
-                    children: _items.map((DomesticHelperSearchOption item) {
-                      return ExpansionPanel(
-                        headerBuilder: (BuildContext context, bool isExpanded) {
-                          return ListTile(
-                            title: Container(
-                              padding: EdgeInsets.all(10),
-                              height: 70,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 5),
-                                    child: CircleAvatar(
-                                      radius: 30,
-                                      backgroundColor: Colors.white,
-                                      child: Image.asset(item.imageUrl),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 20,
-                                  ),
-                                  Text(
-                                    //TODO:check
-                                    item.headerDescription,
-                                    style: TextStyle(
-                                        fontSize: 16, fontWeight: FontWeight.bold),
-                                  ),
-                                  SizedBox(
-                                    width: 80,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          );
-                        },
-                        isExpanded: expandedSet.contains(item.headerTag),
-                        body: Column(
-                          children: item.items
-                              .map(
-                                (e) => Card(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(0.0),
-                                  ),
-                                  child: ListTile(
-                                    title: Text(e.description),
-                                    trailing: Radio(
-                                      value: e.tag,
-                                      groupValue: state.map[item.headerTag],
-                                      activeColor: Colors.blue,
-                                      onChanged: (val) {
-                                        BlocProvider.of<SearchBloc>(context).add(ChangeCategoryValue(item.headerTag, e.tag));
-                                      },
-                                    ),
+                //expansion panel
+                ExpansionPanelList(
+                  expansionCallback: (int index, bool isExpanded) {
+                    setState(() {
+                      // _items[index].isExpanded = !_items[index].isExpanded;
+                      print('Index ${index} ${isExpanded}');
+                      if (isExpanded) {
+                        expandedSet.remove(_items[index].headerTag);
+                      } else {
+                        expandedSet.add(_items[index].headerTag);
+                      }
+                    });
+                  },
+                  children: _items.map((DomesticHelperSearchOption item) {
+                    return ExpansionPanel(
+                      headerBuilder: (BuildContext context, bool isExpanded) {
+                        return ListTile(
+                          title: Container(
+                            padding: EdgeInsets.all(10),
+                            height: 70,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 5),
+                                  child: CircleAvatar(
+                                    radius: 30,
+                                    backgroundColor: Colors.white,
+                                    child: Image.asset(item.imageUrl),
                                   ),
                                 ),
-                              )
-                              .toList(),
-                        ),
-                      );
-                    }).toList(),
-                  ),
-                  SizedBox(height: 40),
-                  Container(
-                      margin: EdgeInsets.all(15),
-                      child: AppButton(title: "submit", onpressed: () {
-                        Navigator.of(context).pushNamed(RouteConfiguration.DOMESTIC_WORKER_PROFILE_PAGE);
-                      })),
-                ],
-              );
-            }
-          ),
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  //TODO:check
+                                  item.headerDescription,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                SizedBox(
+                                  width: 80,
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      isExpanded: expandedSet.contains(item.headerTag),
+                      body: Column(
+                        children: item.items
+                            .map(
+                              (e) => Card(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(0.0),
+                                ),
+                                child: ListTile(
+                                  title: Text(e.description),
+                                  trailing: Radio(
+                                    value: e.tag,
+                                    groupValue: state.map[item.headerTag],
+                                    activeColor: Colors.blue,
+                                    onChanged: (val) {
+                                      BlocProvider.of<SearchBloc>(context).add(
+                                          ChangeCategoryValue(
+                                              item.headerTag, e.tag));
+                                    },
+                                  ),
+                                ),
+                              ),
+                            )
+                            .toList(),
+                      ),
+                    );
+                  }).toList(),
+                ),
+                SizedBox(height: 40),
+                Container(
+                    margin: EdgeInsets.all(15),
+                    child: AppButton(
+                        title: "submit",
+                        onpressed: () {
+                          BlocProvider.of<SearchBloc>(context).state;
+                          Navigator.of(context)
+                              .pushNamed(RouteConfiguration.LISTING_PAGE);
+                        })),
+              ],
+            );
+          }),
         ),
       ),
     );

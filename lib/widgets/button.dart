@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 class AppButton extends StatelessWidget {
   final String title;
   final Function onpressed;
-  AppButton({@required this.onpressed, @required this.title});
+  final Color color;
+  AppButton({@required this.onpressed, @required this.title, this.color});
   @override
   Widget build(BuildContext context) {
     return ButtonTheme(
-      buttonColor: Colors.green,
+      buttonColor: color,
       minWidth: 350,
       height: 50,
       child: RaisedButton(
