@@ -1,27 +1,21 @@
 part of 'listing_bloc.dart';
 
-@immutable
-abstract class ListingEvent {}
+abstract class ListingEvent extends Equatable {
+  final dynamic payload;
+  ListingEvent(this.payload);
 
-class ChangeTagEvent extends ListingEvent {
-  final String tag;
-  ChangeTagEvent({this.tag});
+  @override
+  List<Object> get props => [Names, Rating, ForwardButton];
 }
 
-class ChangeNameEvent extends ListingEvent {
-  final String tag;
-  final String name;
-  ChangeNameEvent({this.tag, this.name});
+class Names extends ListingEvent {
+  Names(payload) : super(payload);
 }
 
-class ChangeImageEvent extends ListingEvent {
-  final String tag;
-  final Image image;
-  ChangeImageEvent({this.tag, this.image});
+class Rating extends ListingEvent {
+  Rating(payload) : super(payload);
 }
 
-class ChangeRatingEvent extends ListingEvent {
-  final String tag;
-  final Icon icon;
-  ChangeRatingEvent({this.tag, this.icon});
+class ForwardButton extends ListingEvent {
+  ForwardButton(payload) : super(payload);
 }

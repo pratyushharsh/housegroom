@@ -1,18 +1,21 @@
 part of 'listing_bloc.dart';
 
-@immutable
-class ListingState extends Equatable {
-  final String tag;
-  final Map<String, String> map;
+abstract class ListingState extends Equatable {
+  final String names;
+  final Widget icons;
 
-  ListingState({this.tag, this.map});
+  ListingState({this.icons, this.names});
 
-  ListingState copyWith({
-    String tag,
-    Map<String, String> map,
-  }) {
-    return ListingState(map: map ?? this.map, tag: tag ?? this.tag);
-  }
+  @override
+  List<Object> get props => [];
+}
 
-  List<Object> get props => [tag, map];
+class InitialListingState extends ListingState {
+  InitialListingState() : super(names: 'Laxmi', icons: Icon(Icons.star));
+}
+
+class NewListingState extends ListingState {
+  NewListingState.fromOldListingState(ListingState oldState,
+      {String names, Widget icons})
+      : super(names: names ?? oldState.names, icons: icons ?? oldState.icons);
 }
