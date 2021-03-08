@@ -27,6 +27,16 @@ class Listing extends StatelessWidget {
                 backgroundColor: Colors.blue,
               ),
               title: Text('${names[index]}'),
+              //TODO:add stars
+              subtitle: Row(
+                children: [
+                  starWidget(),
+                  starWidget(),
+                  starWidget(),
+                  starWidget(),
+                  starWidget(),
+                ],
+              ),
               trailing: IconButton(
                 icon: Icon(Icons.arrow_forward_ios),
                 onPressed: () {
@@ -40,4 +50,12 @@ class Listing extends StatelessWidget {
       ),
     );
   }
+}
+
+Icon starWidget() {
+  return Icon(
+    Icons.star,
+    color: Colors.amberAccent,
+    size: 30,
+  );
 }

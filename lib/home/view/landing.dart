@@ -42,6 +42,7 @@ class LandingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 3,
         backgroundColor: Colors.white,
         leading: Container(
           margin: EdgeInsets.all(8),

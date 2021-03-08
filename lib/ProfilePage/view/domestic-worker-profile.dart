@@ -132,7 +132,7 @@ class DomesticWorkerProfilePage extends StatelessWidget {
                 height: 200,
                 width: 450,
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 15),
+                  padding: EdgeInsets.only(left: 15),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -141,31 +141,11 @@ class DomesticWorkerProfilePage extends StatelessWidget {
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Icon(
-                              Icons.star,
-                              color: Colors.amberAccent,
-                              size: 30,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.amberAccent,
-                              size: 30,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.amberAccent,
-                              size: 30,
-                            ),
-                            Icon(
-                              Icons.star,
-                              color: Colors.amberAccent,
-                              size: 30,
-                            ),
-                            Icon(
-                              Icons.star_border,
-                              color: Colors.amberAccent,
-                              size: 30,
-                            ),
+                            starWidget(),
+                            starWidget(),
+                            starWidget(),
+                            starWidget(),
+                            starWidget(),
                             Text(
                               "4/5",
                               style: TextStyle(
@@ -254,6 +234,15 @@ class DomesticWorkerProfilePage extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+//star icon
+  Icon starWidget() {
+    return Icon(
+      Icons.star,
+      color: Colors.amberAccent,
+      size: 30,
     );
   }
 }
