@@ -35,11 +35,11 @@ class Listing extends StatelessWidget {
                   //TODO:add stars
                   subtitle: Row(
                     children: [
-                      starWidget(state.icons),
-                      starWidget(state.icons),
-                      starWidget(state.icons),
-                      starWidget(state.icons),
-                      starWidget(state.icons),
+                      starWidget(state.star),
+                      starWidget(state.star),
+                      starWidget(state.star),
+                      starWidget(state.star),
+                      starWidget(state.star),
                     ],
                   ),
                   trailing: IconButton(

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:housegroom/login/bloc/login_bloc.dart';
-import 'package:housegroom/sign_up/view/sign_up_page.dart';
 
 import '../../route.dart';
 

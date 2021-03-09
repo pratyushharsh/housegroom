@@ -3,6 +3,7 @@ import 'dart:collection';
 
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
+import 'package:housegroom/home/view/home_page.dart';
 import 'package:meta/meta.dart';
 
 import 'models/models.dart';
@@ -49,8 +50,7 @@ class AuthenticationRepository {
           options: CognitoSignUpOptions(userAttributes: attrib));
       print(result.nextStep);
     } catch (e) {
-      print(e);
-      //todo:change
+      print(e.message);
       throw SignUpFailure();
     }
   }
@@ -98,11 +98,14 @@ class AuthenticationRepository {
     assert(email != null && password != null);
 
     try {
-      Map<String, String> attrib = HashMap();
-      var res = await Amplify.Auth.signIn(username: email, password: password);
+      // Map<String, String> attrib = HashMap();
+      var res = await Amplify.Auth.signIn(
+        username: email,
+        password: password,
+      );
       print(res);
     } catch (e) {
-      print(e);
+      print(e.message);
     }
     // try {
     //   await _firebaseAuth.signInWithEmailAndPassword(

@@ -21,7 +21,7 @@ class ListingBloc extends Bloc<ListingEvent, ListingState> {
           names: event.payload);
     } else if (event is Icons) {
       yield NewListingState.fromOldListingState(currentState,
-          icons: event.payload);
+          star: event.payload);
     }
   }
 }

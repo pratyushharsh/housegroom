@@ -68,7 +68,7 @@ class _DomesticHelperSearchState extends State<DomesticHelperSearch> {
                   expansionCallback: (int index, bool isExpanded) {
                     setState(() {
                       // _items[index].isExpanded = !_items[index].isExpanded;
-                      print('Index ${index} ${isExpanded}');
+                      print('Index $index $isExpanded');
                       if (isExpanded) {
                         expandedSet.remove(_items[index].headerTag);
                       } else {

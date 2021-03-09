@@ -16,12 +16,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiRepositoryProvider(
-      providers: [
-        RepositoryProvider(create: (_) => authRepo)
-      ],
+      providers: [RepositoryProvider(create: (_) => authRepo)],
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (_) => AuthenticationBloc(authenticationRepository: authRepo)..add(AuthenticationUserChanged(User.empty))),
+          BlocProvider(
+              create: (_) =>
+                  AuthenticationBloc(authenticationRepository: authRepo)
+                    ..add(AuthenticationUserChanged(User.empty))),
           BlocProvider(create: (_) => ListingBloc())
         ],
         child: AppView(),
@@ -57,13 +58,13 @@ class _AppViewState extends State<AppView> {
               case AuthenticationStatus.unauthenticated:
                 _navigator.pushAndRemoveUntil<void>(
                   LoginPage.route(),
-                      (route) => false,
+                  (route) => false,
                 );
                 break;
               default:
                 _navigator.pushAndRemoveUntil<void>(
                   LoginPage.route(),
-                      (route) => false,
+                  (route) => false,
                 );
                 break;
             }
