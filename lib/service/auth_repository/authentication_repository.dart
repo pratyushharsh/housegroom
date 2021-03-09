@@ -19,11 +19,7 @@ class LogInWithGoogleFailure implements Exception {}
 /// Thrown during the logout process if a failure occurs.
 class LogOutFailure implements Exception {}
 
-
 class AuthenticationRepository {
-
-
-
   /// Stream of [User] which will emit the current user when
   /// the authentication state changes.
   ///
@@ -47,10 +43,14 @@ class AuthenticationRepository {
     assert(email != null && password != null);
     try {
       Map<String, String> attrib = HashMap();
-      var result = await Amplify.Auth.signUp(username: email, password: password, options: CognitoSignUpOptions(userAttributes: attrib));
+      var result = await Amplify.Auth.signUp(
+          username: email,
+          password: password,
+          options: CognitoSignUpOptions(userAttributes: attrib));
       print(result.nextStep);
     } catch (e) {
       print(e);
+      //todo:change
       throw SignUpFailure();
     }
   }
@@ -61,7 +61,8 @@ class AuthenticationRepository {
   }) async {
     assert(email != null && confirmationCode != null);
     try {
-      var result = await Amplify.Auth.confirmSignUp(username: email, confirmationCode: confirmationCode);
+      var result = await Amplify.Auth.confirmSignUp(
+          username: email, confirmationCode: confirmationCode);
       print(result.isSignUpComplete);
       print(result.nextStep);
     } catch (e) {
@@ -100,7 +101,7 @@ class AuthenticationRepository {
       Map<String, String> attrib = HashMap();
       var res = await Amplify.Auth.signIn(username: email, password: password);
       print(res);
-    } catch(e) {
+    } catch (e) {
       print(e);
     }
     // try {

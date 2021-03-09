@@ -4,6 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:housegroom/login/bloc/login_bloc.dart';
 import 'package:housegroom/sign_up/view/sign_up_page.dart';
 
+import '../../route.dart';
+
 class LoginForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -17,21 +19,66 @@ class LoginForm extends StatelessWidget {
             );
         }
       },
-      child: Align(
-        alignment: const Alignment(0, -1 / 3),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            _UsernameInput(),
-            const Padding(padding: EdgeInsets.all(12)),
-            _PasswordInput(),
-            const Padding(padding: EdgeInsets.all(12)),
-            _LoginButton(),
-            SizedBox(height: 20,),
-            InkWell(child: Text("Click to signup"), onTap: () {
-              Navigator.of(context).push(SignUpPage.route());
-            },)
-          ],
+      child: Scaffold(
+        body: Container(
+          child: SingleChildScrollView(
+            child: SafeArea(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: PageFlatbutton(title: "Skip"),
+                  ),
+                  SizedBox(height: 20),
+                  Image.asset(
+                    "images/groom1.png",
+                    fit: BoxFit.fill,
+                    height: 100,
+                    width: 100,
+                  ),
+                  Text(
+                    "Housegroom",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
+                  Pagetext(title: "Home Service Expert"),
+                  SizedBox(height: 100),
+                  //
+                  _UsernameInput(),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  _PasswordInput(),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: PageFlatbutton(title: 'Forgotten Password?'),
+                  ),
+                  _LoginButton(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Pagetext(title: 'New user?'),
+                      PageFlatbutton(
+                        title: 'Register here',
+                        //TODO:route not working
+                        onpresssed: () {
+                          Navigator.of(context)
+                              .pushNamed(RouteConfiguration.SIGNUPPAGE);
+                        },
+                      )
+                    ],
+                  ),
+                  Center(
+                    child: Pagetext(
+                      title:
+                          "By continue, you agree to our Terms & Conditions" +
+                              "\n                           and Privacy Policy",
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
@@ -49,7 +96,16 @@ class _UsernameInput extends StatelessWidget {
           onChanged: (username) =>
               context.read<LoginBloc>().add(LoginUsernameChanged(username)),
           decoration: InputDecoration(
-            labelText: 'username',
+            border:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
+            hintText: 'Enter your Email address',
+            hintStyle: TextStyle(
+                color: Colors.black,
+                fontSize: 12,
+                fontWeight: FontWeight.normal),
+            labelText: 'Email address',
+            labelStyle:
+                TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
             errorText: state.username.invalid ? 'invalid username' : null,
           ),
         );
@@ -70,7 +126,16 @@ class _PasswordInput extends StatelessWidget {
               context.read<LoginBloc>().add(LoginPasswordChanged(password)),
           obscureText: true,
           decoration: InputDecoration(
-            labelText: 'password',
+            border:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
+            hintText: 'Enter your password',
+            hintStyle: TextStyle(
+                color: Colors.black,
+                fontSize: 12,
+                fontWeight: FontWeight.normal),
+            labelText: 'Password',
+            labelStyle:
+                TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
             errorText: state.password.invalid ? 'invalid password' : null,
           ),
         );
@@ -97,6 +162,33 @@ class _LoginButton extends StatelessWidget {
                     : null,
               );
       },
+    );
+  }
+}
+
+class Pagetext extends StatelessWidget {
+  final String title;
+  Pagetext({this.title});
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: TextStyle(
+          color: Colors.grey[600], fontSize: 14, fontWeight: FontWeight.normal),
+    );
+  }
+}
+
+//flatbutton
+class PageFlatbutton extends StatelessWidget {
+  final String title;
+  final Function onpresssed;
+  PageFlatbutton({this.title, this.onpresssed});
+  @override
+  Widget build(BuildContext context) {
+    return FlatButton(
+      child: Text(title),
+      onPressed: onpresssed,
     );
   }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:housegroom/bloc_observer.dart';
-import 'package:housegroom/listing/bloc/listing_bloc.dart';
 import 'package:amplify_flutter/amplify.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:housegroom/service/auth_repository/authentication_repository.dart';
@@ -9,6 +8,17 @@ import 'package:housegroom/service/auth_repository/authentication_repository.dar
 import 'home.dart';
 
 import 'amplifyconfiguration.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  _initAmplifyFlutter();
+
+  AuthenticationRepository repo = AuthenticationRepository();
+  Bloc.observer = HouseGroomBlockObserver();
+  runApp(App(
+    authRepo: repo,
+  ));
+}
 
 void _initAmplifyFlutter() async {
   try {
@@ -20,13 +30,4 @@ void _initAmplifyFlutter() async {
     print(
         "Amplify was already configured. Looks like app restarted on android.");
   }
-}
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  _initAmplifyFlutter();
-
-  AuthenticationRepository repo = AuthenticationRepository();
-  Bloc.observer = HouseGroomBlockObserver();
-  runApp(App(authRepo: repo,));
 }
