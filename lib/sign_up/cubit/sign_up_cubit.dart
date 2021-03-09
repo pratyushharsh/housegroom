@@ -62,10 +62,23 @@ class SignUpCubit extends Cubit<SignUpState> {
   Future<void> signUpFormSubmitted() async {
     if (!state.status.isValidated) return;
     emit(state.copyWith(status: FormzStatus.submissionInProgress));
+    await Future.delayed(Duration(seconds: 2));
     try {
       await _authenticationRepository.signUp(
         email: state.email.value,
         password: state.password.value,
+      );
+      emit(state.copyWith(status: FormzStatus.submissionSuccess));
+    } on Exception {
+      emit(state.copyWith(status: FormzStatus.submissionFailure));
+    }
+  }
+
+  Future<void> confirmSignUpCode(String code) async {
+    try {
+      await _authenticationRepository.confirmSignUp(
+        email: state.email.value,
+        confirmationCode: code,
       );
       emit(state.copyWith(status: FormzStatus.submissionSuccess));
     } on Exception {

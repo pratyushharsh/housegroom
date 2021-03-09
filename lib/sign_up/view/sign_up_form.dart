@@ -28,9 +28,37 @@ class SignUpForm extends StatelessWidget {
             _ConfirmPasswordInput(),
             const SizedBox(height: 8.0),
             _SignUpButton(),
+            SizedBox(height: 10,),
+            _ConfirmCodeInput()
           ],
         ),
       ),
+    );
+  }
+}
+
+class _ConfirmCodeInput extends StatelessWidget {
+
+  String code = '';
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        TextField(
+          onChanged: (val) {
+            code = val;
+          },
+          keyboardType: TextInputType.number,
+          decoration: InputDecoration(
+            labelText: 'enter otp',
+            helperText: '',
+          ),
+        ),
+        RaisedButton(onPressed: () {
+          context.read<SignUpCubit>().confirmSignUpCode(code);
+        }, child: Text("Submit"),)
+      ],
     );
   }
 }

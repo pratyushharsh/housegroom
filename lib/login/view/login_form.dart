@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:formz/formz.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:housegroom/login/bloc/login_bloc.dart';
+import 'package:housegroom/sign_up/view/sign_up_page.dart';
 
 class LoginForm extends StatelessWidget {
   @override
@@ -26,6 +27,10 @@ class LoginForm extends StatelessWidget {
             _PasswordInput(),
             const Padding(padding: EdgeInsets.all(12)),
             _LoginButton(),
+            SizedBox(height: 20,),
+            InkWell(child: Text("Click to signup"), onTap: () {
+              Navigator.of(context).push(SignUpPage.route());
+            },)
           ],
         ),
       ),

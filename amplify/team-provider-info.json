@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-housegroom-dev-213331-authRole",
+      "UnauthRoleArn": "arn:aws:iam::729821483112:role/amplify-housegroom-dev-213331-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::729821483112:role/amplify-housegroom-dev-213331-authRole",
+      "Region": "ap-south-1",
+      "DeploymentBucketName": "amplify-housegroom-dev-213331-deployment",
+      "UnauthRoleName": "amplify-housegroom-dev-213331-unauthRole",
+      "StackName": "amplify-housegroom-dev-213331",
+      "StackId": "arn:aws:cloudformation:ap-south-1:729821483112:stack/amplify-housegroom-dev-213331/d5f671f0-8027-11eb-a789-0a8b8710f34e",
+      "AmplifyAppId": "d2afrqq2n1lxqz"
+    },
+    "categories": {
+      "auth": {
+        "housegroomd3cb0f24": {}
+      }
+    }
+  }
+}

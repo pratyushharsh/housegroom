@@ -1,0 +1,10 @@
+{
+  "auth": {
+    "housegroomd3cb0f24": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

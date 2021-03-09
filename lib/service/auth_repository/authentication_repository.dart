@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:collection';
 
-// import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify.dart';
 import 'package:meta/meta.dart';
 
 import 'models/models.dart';
@@ -17,19 +19,10 @@ class LogInWithGoogleFailure implements Exception {}
 /// Thrown during the logout process if a failure occurs.
 class LogOutFailure implements Exception {}
 
-/// {@template authentication_repository}
-/// Repository which manages user authentication.
-/// {@endtemplate}
-class AuthenticationRepository {
-  /// {@macro authentication_repository}
-  // AuthenticationRepository({
-    // firebase_auth.FirebaseAuth firebaseAuth,
-    // GoogleSignIn googleSignIn,
-  // })  : _firebaseAuth = firebaseAuth ?? firebase_auth.FirebaseAuth.instance;
-        // _googleSignIn = googleSignIn ?? GoogleSignIn.standard();
 
-  // final firebase_auth.FirebaseAuth _firebaseAuth;
-  // final GoogleSignIn _googleSignIn;
+class AuthenticationRepository {
+
+
 
   /// Stream of [User] which will emit the current user when
   /// the authentication state changes.
@@ -39,6 +32,9 @@ class AuthenticationRepository {
     // return _firebaseAuth.authStateChanges().map((firebaseUser) {
     //   return firebaseUser == null ? User.empty : firebaseUser.toUser;
     // });
+    Amplify.Hub.listen([HubChannel.Auth], (hubEvent) {
+      print(hubEvent.eventName);
+    });
   }
 
   /// Creates a new user with the provided [email] and [password].
@@ -49,14 +45,29 @@ class AuthenticationRepository {
     @required String password,
   }) async {
     assert(email != null && password != null);
-    // try {
-    //   await _firebaseAuth.createUserWithEmailAndPassword(
-    //     email: email,
-    //     password: password,
-    //   );
-    // } on Exception {
-    //   throw SignUpFailure();
-    // }
+    try {
+      Map<String, String> attrib = HashMap();
+      var result = await Amplify.Auth.signUp(username: email, password: password, options: CognitoSignUpOptions(userAttributes: attrib));
+      print(result.nextStep);
+    } catch (e) {
+      print(e);
+      throw SignUpFailure();
+    }
+  }
+
+  Future<void> confirmSignUp({
+    @required String email,
+    @required String confirmationCode,
+  }) async {
+    assert(email != null && confirmationCode != null);
+    try {
+      var result = await Amplify.Auth.confirmSignUp(username: email, confirmationCode: confirmationCode);
+      print(result.isSignUpComplete);
+      print(result.nextStep);
+    } catch (e) {
+      print(e);
+      throw SignUpFailure();
+    }
   }
 
   /// Starts the Sign In with Google Flow.
@@ -84,6 +95,14 @@ class AuthenticationRepository {
     @required String password,
   }) async {
     assert(email != null && password != null);
+
+    try {
+      Map<String, String> attrib = HashMap();
+      var res = await Amplify.Auth.signIn(username: email, password: password);
+      print(res);
+    } catch(e) {
+      print(e);
+    }
     // try {
     //   await _firebaseAuth.signInWithEmailAndPassword(
     //     email: email,

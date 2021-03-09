@@ -16,10 +16,10 @@ class AuthenticationBloc
     @required AuthenticationRepository authenticationRepository,
   })  : assert(authenticationRepository != null),
         _authenticationRepository = authenticationRepository,
-        super(const AuthenticationState.unknown()) {
-    _userSubscription = _authenticationRepository.user.listen(
-      (user) => add(AuthenticationUserChanged(user)),
-    );
+        super(const AuthenticationState.unauthenticated()) {
+    // _userSubscription = _authenticationRepository.user.listen(
+    //   (user) => add(AuthenticationUserChanged(user)),
+    // );
   }
 
   final AuthenticationRepository _authenticationRepository;
