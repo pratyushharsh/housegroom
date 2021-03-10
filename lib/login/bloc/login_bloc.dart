@@ -2,8 +2,9 @@ import 'dart:async';
 
 import 'package:bloc/bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:housegroom/login/login.dart';
+import 'package:housegroom/authentication/authentication.dart';
 import 'package:formz/formz.dart';
+import 'package:housegroom/login/models/username.dart';
 import 'package:housegroom/service/auth_repository/authentication_repository.dart';
 import 'package:meta/meta.dart';
 
@@ -13,11 +14,14 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc({
     @required AuthenticationRepository authenticationRepository,
+    @required AuthenticationBloc authBloc
   })  : assert(authenticationRepository != null),
         _authenticationRepository = authenticationRepository,
+        _authBloc = authBloc,
         super(const LoginState());
 
   final AuthenticationRepository _authenticationRepository;
+  final AuthenticationBloc _authBloc;
 
   @override
   Stream<LoginState> mapEventToState(
@@ -61,11 +65,14 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     if (state.status.isValidated) {
       yield state.copyWith(status: FormzStatus.submissionInProgress);
       try {
-        await _authenticationRepository.logInWithEmailAndPassword(
+        bool loggedIn = await _authenticationRepository.logInWithEmailAndPassword(
           email: state.username.value,
           password: state.password.value,
         );
         yield state.copyWith(status: FormzStatus.submissionSuccess);
+        if (loggedIn) {
+          _authBloc.signInIfSessinAvailable();
+        }
       } on Exception catch (_) {
         yield state.copyWith(status: FormzStatus.submissionFailure);
       }

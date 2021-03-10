@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:housegroom/home/view/landing.dart';
+import 'package:housegroom/userProfile/view/user_profile.dart';
 
 class HomePage extends StatefulWidget {
 
@@ -24,7 +25,7 @@ class _HomePageState extends State<HomePage> {
     LandingScreen(),
     LandingScreen(),
     LandingScreen(),
-    LandingScreen()
+    UserProfile()
   ];
 
   @override

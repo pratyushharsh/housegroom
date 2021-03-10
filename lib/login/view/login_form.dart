@@ -59,7 +59,6 @@ class LoginForm extends StatelessWidget {
                       Pagetext(title: 'New user?'),
                       PageFlatbutton(
                         title: 'Register here',
-                        //TODO:route not working
                         onpresssed: () {
                           Navigator.of(context)
                               .pushNamed(RouteConfiguration.SIGNUPPAGE);

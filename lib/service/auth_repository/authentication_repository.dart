@@ -21,22 +21,7 @@ class LogInWithGoogleFailure implements Exception {}
 class LogOutFailure implements Exception {}
 
 class AuthenticationRepository {
-  /// Stream of [User] which will emit the current user when
-  /// the authentication state changes.
-  ///
-  /// Emits [User.empty] if the user is not authenticated.
-  Stream<User> get user {
-    // return _firebaseAuth.authStateChanges().map((firebaseUser) {
-    //   return firebaseUser == null ? User.empty : firebaseUser.toUser;
-    // });
-    Amplify.Hub.listen([HubChannel.Auth], (hubEvent) {
-      print(hubEvent.eventName);
-    });
-  }
 
-  /// Creates a new user with the provided [email] and [password].
-  ///
-  /// Throws a [SignUpFailure] if an exception occurs.
   Future<void> signUp({
     @required String email,
     @required String password,
@@ -75,23 +60,13 @@ class AuthenticationRepository {
   ///
   /// Throws a [LogInWithGoogleFailure] if an exception occurs.
   Future<void> logInWithGoogle() async {
-    // try {
-    //   final googleUser = await _googleSignIn.signIn();
-    //   final googleAuth = await googleUser.authentication;
-    //   final credential = firebase_auth.GoogleAuthProvider.credential(
-    //     accessToken: googleAuth.accessToken,
-    //     idToken: googleAuth.idToken,
-    //   );
-    //   await _firebaseAuth.signInWithCredential(credential);
-    // } on Exception {
-    //   throw LogInWithGoogleFailure();
-    // }
+
   }
 
   /// Signs in with the provided [email] and [password].
   ///
   /// Throws a [LogInWithEmailAndPasswordFailure] if an exception occurs.
-  Future<void> logInWithEmailAndPassword({
+  Future<bool> logInWithEmailAndPassword({
     @required String email,
     @required String password,
   }) async {
@@ -103,38 +78,11 @@ class AuthenticationRepository {
         username: email,
         password: password,
       );
-      print(res);
-    } catch (e) {
-      print(e.message);
+      return res.isSignedIn;
+    } on Exception catch (e) {
+      print(e);
+      throw LogInWithEmailAndPasswordFailure();
     }
-    // try {
-    //   await _firebaseAuth.signInWithEmailAndPassword(
-    //     email: email,
-    //     password: password,
-    //   );
-    // } on Exception {
-    //   throw LogInWithEmailAndPasswordFailure();
-    // }
   }
 
-  /// Signs out the current user which will emit
-  /// [User.empty] from the [user] Stream.
-  ///
-  /// Throws a [LogOutFailure] if an exception occurs.
-  Future<void> logOut() async {
-    // try {
-    //   await Future.wait([
-    //     _firebaseAuth.signOut(),
-    //     _googleSignIn.signOut(),
-    //   ]);
-    // } on Exception {
-    //   throw LogOutFailure();
-    // }
-  }
 }
-
-// extension on firebase_auth.User {
-//   User get toUser {
-//     return User(id: uid, email: email, name: displayName, photo: photoURL);
-//   }
-// }
